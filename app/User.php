@@ -33,6 +33,11 @@ class User extends Authenticatable
         return $siswa;
     }
 
+    public function siswas()
+    {
+        return $this->hasOne('\App\Siswa', 'user_id');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

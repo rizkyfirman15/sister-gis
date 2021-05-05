@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DataAyah;
+use App\DataIbu;
+use App\DataPribadiSiswa;
+use App\DataSekolahAsal;
 use Auth;
 use App\Siswa;
 use App\Kelas;
@@ -47,16 +51,55 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'no_induk' => 'required|string|unique:siswa',
-            'nama_siswa' => 'required',
-            'jk' => 'required',
-            'kelas_id' => 'required'
+            'no_induk'              => 'required|string|unique:siswa',
+            'nama_siswa'            => 'required',
+            'jk'                    => 'required',
+            'kelas_id'              => 'required',
+            'foto'                  => 'mimes:png,jpg,jpeg',
+            'no_registrasi_akta'    => 'required',
+            'agama'                 => 'required',
+            'alamat'                => 'required',
+            'rt'                    => 'required',
+            'rw'                    => 'required',
+            'kecamatan'             => 'required',
+            'kelurahan'             => 'required',
+            'kode_pos'              => 'required',
+            'anak_ke'               => 'required',
+            'jumlah_saudara_kandung'=> 'required',
+            'hobby'                 => 'required',
+            'cita_cita'             => 'required',
+            'parent_email'          => 'required',
+            'name'                  => 'required',
+            'nik'                   => 'required',
+            'tmp_lahir'             => 'required',
+            'tgl_lahir'             => 'required',
+            'pendidikan'            => 'required',
+            'pekerjaan'             => 'required',
+            'agama'                 => 'required',
+            'number_phone'          => 'required',
+            'penghasilan'           => 'required',
+            'tgl_masuk'             => 'required',
+            'tgl_keluar'            => 'required',
+            'name'                  => 'required',
+            'alamat'                => 'required',
+            'no_ijazah'             => 'required',
+            'rata_rata_nilai'       => 'required',
+            'no_skhun'              => 'required',
+            'document'              => 'required|mimes:png,jpg,jpeg',
+            'kk'                    => 'required|mimes:png,jpg,jpeg',
+            'ijazah'                => 'required|mimes:png,jpg,jpeg',
+            'akte'                  => 'required|mimes:png,jpg,jpeg',
+            'raport_terakhir'       => 'required|mimes:png,jpg,jpeg',
         ]);
 
         if ($request->foto) {
             $foto = $request->foto;
             $new_foto = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . "_" . $foto->getClientOriginalName();
+
+            $userId = Auth::user()->id;
+
             Siswa::create([
+                'user_id'  => $userId,
                 'no_induk' => $request->no_induk,
                 'nama_siswa' => $request->nama_siswa,
                 'jk' => $request->jk,
@@ -73,7 +116,10 @@ class SiswaController extends Controller
             } else {
                 $foto = 'uploads/siswa/50271431012020_female.jpg';
             }
-            Guru::create([
+            $userId = Auth::user()->id;
+
+            Siswa::create([
+                'user_id'  => $userId,
                 'no_induk' => $request->no_induk,
                 'nama_siswa' => $request->nama_siswa,
                 'jk' => $request->jk,
@@ -85,7 +131,90 @@ class SiswaController extends Controller
             ]);
         }
 
+        $kk = $this->moveToPublic($request->file('kk'));
+        $akte = $this->moveToPublic($request->file('akte'));
+        $ijazah = $this->moveToPublic($request->file('ijazah'));
+        $raport = $this->moveToPublic($request->file('raport_terakhir'));
+
+        $siswaId = Auth::user()->siswas->id;
+
+        DataPribadiSiswa::create([
+            'siswa_id'              => $siswaId,
+            'no_registrasi_akta'    => $request->no_registrasi_akta,
+            'alamat'                => $request->alamat,
+            'agama'                 => $request->agama,
+            'rt'                    => $request->rt,
+            'rw'                    => $request->rw,
+            'kecamatan'             => $request->kecamatan,
+            'kelurahan'             => $request->kelurahan,
+            'kode_pos'              => $request->kode_pos,
+            'anak_ke'               => $request->anak_ke,
+            'jumlah_saudara_kandung'=> $request->jumlah_saudara_kandung,
+            'hobby'                 => $request->hobby,
+            'cita_cita'             => $request->cita_cita,
+            'parent_email'          => $request->parent_email,
+            'siswa_email'           => $request->siswa_email,
+            'kk'                    => $kk,
+            'akte'                  => $akte,
+            'ijazah'                => $ijazah,
+            'raport_terakhir'       => $raport,
+        ]);
+
+        DataAyah::create([
+            'siswa_id'      => $siswaId,
+            'name'          => $request->name,
+            'nik'           => $request->nik,
+            'tmp_lahir'     => $request->tmp_lahir,
+            'tgl_lahir'     => $request->tgl_lahir,
+            'pendidikan'    => $request->pendidikan,
+            'pekerjaan'     => $request->pekerjaan,
+            'agama'         => $request->agama,
+            'number_phone'  => $request->number_phone,
+            'penghasilan'   => $request->penghasilan
+        ]);
+
+        DataIbu::create([
+            'siswa_id'      => $siswaId,
+            'name'          => $request->name,
+            'nik'           => $request->nik,
+            'tmp_lahir'     => $request->tmp_lahir,
+            'tgl_lahir'     => $request->tgl_lahir,
+            'pendidikan'    => $request->pendidikan,
+            'pekerjaan'     => $request->pekerjaan,
+            'agama'         => $request->agama,
+            'number_phone'  => $request->number_phone,
+            'penghasilan'   => $request->penghasilan
+        ]);
+
+        $document = $this->moveToPublic($request->file('document'));
+
+        DataSekolahAsal::create([
+            'siswa_id'          => $siswaId,
+            'tgl_masuk'         => $request->tgl_masuk,
+            'tgl_keluar'        => $request->tgl_keluar,
+            'name'              => $request->name,
+            'alamat'            => $request->alamat,
+            'no_ijazah'         => $request->no_ijazah,
+            'rata_rata_nilai'   => $request->rata_rata_nilai,
+            'no_skhun'          => $request->no_skhun,
+            'document'          => $document,
+        ]);
+
+
         return redirect()->back()->with('success', 'Berhasil menambahkan data siswa baru!');
+    }
+
+    /**
+     * move file to public data pribadi
+     */
+    public function moveToPublic($file)
+    {
+        // $fileName = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . "_" . $file->getClientOriginalName();
+        $fileName = time()."-".$file->getClientOriginalName();
+        $destination = public_path('img/dataPribadi');
+        $file->move($destination,$fileName);
+
+        return $fileName;
     }
 
     /**
@@ -97,7 +226,8 @@ class SiswaController extends Controller
     public function show($id)
     {
         $id = Crypt::decrypt($id);
-        $siswa = Siswa::findorfail($id);
+        $siswa = Siswa::where('id', $id)->with('dataPribadi', 'sekolah', 'ayah', 'ibu')->first();
+        // dd($siswa);
         return view('admin.siswa.details', compact('siswa'));
     }
 
