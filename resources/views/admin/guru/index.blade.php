@@ -137,12 +137,83 @@
                         <label for="telp">Phone number</label>
                         <input type="text" id="telp" name="telp" onkeypress="return inputAngka(event)" class="form-control @error('telp') is-invalid @enderror">
                     </div>
+                    <div class="form-group">
+                        <label for="alamat">Address</label>
+                        <input type="text" id="alamat" name="alamat" class="form-control @error('alamat') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="rw">RW</label>
+                        <input type="text" id="rw" name="rw" onkeypress="return inputAngka(event)" class="form-control @error('rw') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="kecamatan">Districts</label>
+                        <input type="text" id="kecamatan" name="kecamatan" class="form-control @error('kecamatan') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="nik">NIK</label>
+                        <input type="text" id="nik" name="nik" onkeypress="return inputAngka(event)" class="form-control @error('nik') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="no_npwp">NPWP number</label>
+                        <input type="text" id="no_npwp" name="no_npwp" onkeypress="return inputAngka(event)" class="form-control @error('no_npwp') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="agama">Religion</label>
+                        <input type="text" id="agama" name="agama" class="form-control @error('agama') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="status_perkawinan">Marital status</label>
+                        <select id="status_perkawinan" name="status_perkawinan" class="select2bs4 form-control @error('status_perkawinan') is-invalid @enderror">
+                            <option value="">-- Select Marital status --</option>
+                            <option value="single">Single</option>
+                            <option value="marry">Marry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nik_suami_istri">Spouse's NIK</label>
+                        <input type="text" id="nik_suami_istri" name="nik_suami_istri" onkeypress="return inputAngka(event)" class="form-control @error('nik_suami_istri') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="pekerjaan">Profession</label>
+                        <input type="text" id="pekerjaan" name="pekerjaan" class="form-control @error('pekerjaan') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="satuan_pendidikan_formal">Formal education unit</label>
+                        <input type="text" id="satuan_pendidikan_formal" name="satuan_pendidikan_formal" class="form-control @error('satuan_pendidikan_formal') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="thn_lulus">Graduation year</label>
+                        <input type="text" id="thn_lulus" name="thn_lulus" onkeypress="return inputAngka(event)" class="form-control @error('thn_lulus') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="ktp">Input KTP</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="ktp" class="custom-file-input @error('ktp') is-invalid @enderror" id="ktp">
+                                <label class="custom-file-label" for="ktp">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="npwp">Input NPWP</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="npwp" class="custom-file-input @error('npwp') is-invalid @enderror" id="npwp">
+                                <label class="custom-file-label" for="npwp">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ijazah">Input diploma</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="ijazah" class="custom-file-input @error('ijazah') is-invalid @enderror" id="ijazah">
+                                <label class="custom-file-label" for="ijazah">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="nip">NIP</label>
-                        <input type="text" id="nip" name="nip" onkeypress="return inputAngka(event)" class="form-control @error('nip') is-invalid @enderror">
-                    </div>
                     <div class="form-group">
                         <label for="mapel_id">Subject</label>
                         <select id="mapel_id" name="mapel_id" class="select2bs4 form-control @error('mapel_id') is-invalid @enderror">
@@ -175,11 +246,90 @@
                         <input type="text" id="kode" name="kode" maxlength="3" onkeyup="this.value = this.value.toUpperCase()" class="form-control @error('kode') is-invalid @enderror">
                     </div>
                     <div class="form-group">
-                        <label for="foto">Input file</label>
+                        <label for="nama_ibu_kandung">Mother name</label>
+                        <input type="text" id="nama_ibu_kandung" name="nama_ibu_kandung" class="form-control @error('nama_ibu_kandung') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="rt">RT</label>
+                        <input type="text" id="rt" name="rt" onkeypress="return inputAngka(event)" class="form-control @error('rt') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="kelurahan">Sub-district</label>
+                        <input type="text" id="kelurahan" name="kelurahan" class="form-control @error('kelurahan') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="kode_pos">Postal code</label>
+                        <input type="text" id="kode_pos" name="kode_pos" onkeypress="return inputAngka(event)" class="form-control @error('kode_pos') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="no_kk">Family card number</label>
+                        <input type="text" id="no_kk" name="no_kk" onkeypress="return inputAngka(event)" class="form-control @error('no_kk') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="nama_wajib_pajak">Name of the taxpayer</label>
+                        <input type="text" id="nama_wajib_pajak" name="nama_wajib_pajak" class="form-control @error('nama_wajib_pajak') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="kewarganegaraan">Citizenship</label>
+                        <input type="text" id="kewarganegaraan" name="kewarganegaraan" class="form-control @error('kewarganegaraan') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="nama_suami_istri">Spouse's name</label>
+                        <input type="text" id="nama_suami_istri" name="nama_suami_istri" class="form-control @error('nama_suami_istri') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="jenis_ptk">Kind of College</label>
+                        <select id="jenis_ptk" name="jenis_ptk" class="select2bs4 form-control @error('jenis_ptk') is-invalid @enderror">
+                            <option value="">-- Select Kind of College --</option>
+                            <option value="PTN">PTN</option>
+                            <option value="PTS">PTS</option>
+                            <option value="PTK">PTK</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pendidikan_terakhir">Last education</label>
+                        <input type="text" id="pendidikan_terakhir" name="pendidikan_terakhir" class="form-control @error('pendidikan_terakhir') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="fakultas">Faculty</label>
+                        <input type="text" id="fakultas" name="fakultas" class="form-control @error('fakultas') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="thn_masuk">Entry year</label>
+                        <input type="text" id="thn_masuk" name="thn_masuk" onkeypress="return inputAngka(event)" class="form-control @error('thn_masuk') is-invalid @enderror">
+                    </div>
+                    <div class="form-group">
+                        <label for="kependidikan">Education</label>
+                        <select id="kependidikan" name="kependidikan" class="select2bs4 form-control @error('kependidikan') is-invalid @enderror">
+                            <option value="">-- Select --</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="foto">Input photo</label>
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" name="foto" class="custom-file-input @error('foto') is-invalid @enderror" id="foto">
                                 <label class="custom-file-label" for="foto">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="kk">Input KK</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="kk" class="custom-file-input @error('kk') is-invalid @enderror" id="kk">
+                                <label class="custom-file-label" for="kk">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="akte">Input akte</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="akte" class="custom-file-input @error('akte') is-invalid @enderror" id="akte">
+                                <label class="custom-file-label" for="akte">Choose file</label>
                             </div>
                         </div>
                     </div>

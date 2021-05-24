@@ -209,9 +209,9 @@ class SiswaController extends Controller
      */
     public function moveToPublic($file)
     {
-        // $fileName = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . "_" . $file->getClientOriginalName();
-        $fileName = time()."-".$file->getClientOriginalName();
-        $destination = public_path('img/dataPribadi');
+        $fileName = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . "_" . $file->getClientOriginalName();
+        // $fileName = time()."-".$file->getClientOriginalName();
+        $destination = public_path('uploads/siswa/dataPribadi');
         $file->move($destination,$fileName);
 
         return $fileName;

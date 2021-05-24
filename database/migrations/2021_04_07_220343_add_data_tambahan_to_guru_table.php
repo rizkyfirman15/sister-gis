@@ -21,7 +21,6 @@ class AddDataTambahanToGuruTable extends Migration
             $table->string('kelurahan')->after('rw');
             $table->string('kecamatan')->after('kelurahan');
             $table->string('kode_pos', 7)->after('kecamatan');
-            $table->string('number_phone', 15)->after('kode_pos');
             $table->string('nik', 20)->after('number_phone');
             $table->string('no_kk', 20)->after('nik');
             $table->string('no_npwp', 20)->after('no_kk');
@@ -38,7 +37,6 @@ class AddDataTambahanToGuruTable extends Migration
             $table->string('fakultas')->after('satuan_pendidikan_formal');
             $table->string('thn_masuk')->after('fakultas');
             $table->string('thn_lulus')->after('thn_masuk');
-            $table->string('nim', 20)->after('thn_lulus');
             $table->string('ktp')->after('nim');
             $table->string('kk')->after('ktp');
             $table->string('npwp')->after('kk');

@@ -18,27 +18,27 @@
                         alt="...">
                     <br>
                     <br>
-                    <img src="{{ url ('/img/dataPribadi/'.$siswa->dataPribadi->kk) }}"  
+                    <img src="{{ url ('/uploads/dataPribadi/'.$siswa->dataPribadi->kk) }}"  
                         class="card-img img-details rounded" 
                         alt="...">
                     <br>
                     <br>
-                    <img src="{{ url ('/img/dataPribadi/'.$siswa->dataPribadi->ijazah) }}"  
+                    <img src="{{ url ('/uploads/dataPribadi/'.$siswa->dataPribadi->ijazah) }}"  
                         class="card-img img-details rounded" 
                         alt="...">
                     <br>
                     <br>
-                    <img src="{{ url ('/img/dataPribadi/'.$siswa->dataPribadi->akte) }}"  
+                    <img src="{{ url ('/uploads/dataPribadi/'.$siswa->dataPribadi->akte) }}"  
                         class="card-img img-details rounded" 
                         alt="...">
                     <br>
                     <br>
-                    <img src="{{ url ('/img/dataPribadi/'.$siswa->dataPribadi->raport_terakhir) }}"  
+                    <img src="{{ url ('/uploads/dataPribadi/'.$siswa->dataPribadi->raport_terakhir) }}"  
                         class="card-img img-details rounded" 
                         alt="...">
                     <br>
                     <br>
-                    <img src="{{ url ('/img/dataPribadi/'.$siswa->dataPribadi->document) }}"  
+                    <img src="{{ url ('/uploads/dataPribadi/'.$siswa->dataPribadi->document) }}"  
                         class="card-img img-details rounded" 
                         alt="...">
                     <br>

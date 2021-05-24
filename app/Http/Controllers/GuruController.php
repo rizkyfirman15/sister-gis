@@ -50,27 +50,90 @@ class GuruController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'id_card' => 'required',
-            'nama_guru' => 'required',
-            'mapel_id' => 'required',
-            'kode' => 'required|string|unique:guru|min:2|max:3',
-            'jk' => 'required'
+            'id_card'                  => 'required',
+            'nama_guru'                => 'required',
+            'mapel_id'                 => 'required',
+            'kode'                     => 'required|string|unique:guru|min:2|max:3',
+            'jk'                       => 'required',
+            'nama_ibu_kandung'         => 'required',
+            'alamat'                   => 'required',
+            'rt'                       => 'required',
+            'rw'                       => 'required',
+            'kelurahan'                => 'required',
+            'kecamatan'                => 'required',
+            'kode_pos'                 => 'required',
+            'nik'                      => 'required',
+            'no_kk'                    => 'required',
+            'no_npwp'                  => 'required',
+            'nama_wajib_pajak'         => 'required',
+            'agama'                    => 'required',
+            'kewarganegaraan'          => 'required',
+            'status_perkawinan'        => 'required',
+            'nama_suami_istri'         => 'required',
+            'nik_suami_istri'          => 'required',
+            'pekerjaan'                => 'required',
+            'jenis_ptk'                => 'required',
+            'pendidikan_terakhir'      => 'required',
+            'satuan_pendidikan_formal' => 'required',
+            'fakultas'                 => 'required',
+            'thn_masuk'                => 'required',
+            'thn_lulus'                => 'required',
+            'ktp'                      => 'mimes:jpg,jpeg,png',
+            'kk'                       => 'mimes:jpg,jpeg,png',
+            'npwp'                     => 'mimes:jpg,jpeg,png',
+            'ijazah'                   => 'mimes:jpg,jpeg,png',
+            'akte'                     => 'mimes:jpg,jpeg,png',
+            'kependidikan'             => 'required',
         ]);
 
         if ($request->foto) {
             $foto = $request->foto;
             $new_foto = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . "_" . $foto->getClientOriginalName();
+            $ktp = $this->moveToPublic($request->file('ktp'));
+            $kk = $this->moveToPublic($request->file('kk'));
+            $npwp = $this->moveToPublic($request->file('npwp'));
+            $ijazah = $this->moveToPublic($request->file('ijazah'));
+            $akte = $this->moveToPublic($request->file('akte'));
+
             Guru::create([
-                'id_card' => $request->id_card,
-                'nip' => $request->nip,
-                'nama_guru' => $request->nama_guru,
-                'mapel_id' => $request->mapel_id,
-                'kode' => $request->kode,
-                'jk' => $request->jk,
-                'telp' => $request->telp,
-                'tmp_lahir' => $request->tmp_lahir,
-                'tgl_lahir' => $request->tgl_lahir,
-                'foto' => 'uploads/guru/' . $new_foto
+                'id_card'               => $request->id_card,
+                'nama_guru'             => $request->nama_guru,
+                'mapel_id'              => $request->mapel_id,
+                'kode'                  => $request->kode,
+                'jk'                    => $request->jk,
+                'telp'                  => $request->telp,
+                'tmp_lahir'             => $request->tmp_lahir,
+                'tgl_lahir'             => $request->tgl_lahir,
+                'nama_ibu_kandung'      => $request->nama_ibu_kandung,
+                'alamat'                => $request->alamat,
+                'rt'                    => $request->rt,
+                'rw'                    => $request->rw,
+                'kelurahan'             => $request->kelurahan,
+                'kecamatan'             => $request->kecamatan,
+                'kode_pos'              => $request->kode_pos,
+                'nik'                   => $request->nik,
+                'no_kk'                 => $request->no_kk,
+                'no_npwp'               => $request->no_npwp,
+                'nama_wajib_pajak'      => $request->nama_wajib_pajak,
+                'agama'                 => $request->agama,
+                'kewarganegaraan'       => $request->kewarganegaraan,
+                'status_perkawinan'     => $request->status_perkawinan,
+                'nama_suami_istri'      => $request->nama_suami_istri,
+                'nik_suami_istri'       => $request->nik_suami_istri,
+                'pekerjaan'             => $request->pekerjaan,
+                'jenis_ptk'             => $request->jenis_ptk,
+                'pendidikan_terakhir'   => $request->pendidikan_terakhir,
+                'satuan_pendidikan_formal'=> $request->satuan_pendidikan_formal,
+                'fakultas'                => $request->fakultas,
+                'thn_masuk'               => $request->thn_masuk,
+                'thn_lulus'               => $request->thn_lulus,
+                'kependidikan'            => $request->kependidikan,
+                'ktp'                     => $ktp,
+                'kk'                      => $kk,
+                'npwp'                    => $npwp,
+                'ijazah'                  => $ijazah,
+                'akte'                    => $akte,
+                'foto'                    => 'uploads/guru/' . $new_foto,
             ]);
             $foto->move('uploads/guru/', $new_foto);
         } else {
@@ -79,21 +142,68 @@ class GuruController extends Controller
             } else {
                 $foto = 'uploads/guru/23171022042020_female.jpg';
             }
+
+            $ktp = $this->moveToPublic($request->file('ktp'));
+            $kk = $this->moveToPublic($request->file('kk'));
+            $npwp = $this->moveToPublic($request->file('npwp'));
+            $ijazah = $this->moveToPublic($request->file('ijazah'));
+            $akte = $this->moveToPublic($request->file('akte'));
+
             Guru::create([
-                'id_card' => $request->id_card,
-                'nip' => $request->nip,
-                'nama_guru' => $request->nama_guru,
-                'mapel_id' => $request->mapel_id,
-                'kode' => $request->kode,
-                'jk' => $request->jk,
-                'telp' => $request->telp,
-                'tmp_lahir' => $request->tmp_lahir,
-                'tgl_lahir' => $request->tgl_lahir,
-                'foto' => $foto
+                'id_card'               => $request->id_card,
+                'nama_guru'             => $request->nama_guru,
+                'mapel_id'              => $request->mapel_id,
+                'kode'                  => $request->kode,
+                'jk'                    => $request->jk,
+                'telp'                  => $request->telp,
+                'tmp_lahir'             => $request->tmp_lahir,
+                'tgl_lahir'             => $request->tgl_lahir,
+                'nama_ibu_kandung'      => $request->nama_ibu_kandung,
+                'alamat'                => $request->alamat,
+                'rt'                    => $request->rt,
+                'rw'                    => $request->rw,
+                'kelurahan'             => $request->kelurahan,
+                'kecamatan'             => $request->kecamatan,
+                'kode_pos'              => $request->kode_pos,
+                'number_phone'          => $request->number_phone,
+                'no_kk'                 => $request->no_kk,
+                'no_npwp'               => $request->no_npwp,
+                'nama_wajib_pajak'      => $request->nama_wajib_pajak,
+                'agama'                 => $request->agama,
+                'kewarganegaraan'       => $request->kewarganegaraan,
+                'status_perkawinan'     => $request->status_perkawinan,
+                'nama_suami_istri'      => $request->nama_suami_istri,
+                'nik_suami_istri'       => $request->nik_suami_istri,
+                'pekerjaan'             => $request->pekerjaan,
+                'jenis_ptk'             => $request->jenis_ptk,
+                'pendidikan_terakhir'   => $request->pendidikan_terakhir,
+                'satuan_pendidikan_formal'=> $request->satuan_pendidikan_formal,
+                'fakultas'                => $request->fakultas,
+                'thn_masuk'               => $request->thn_masuk,
+                'thn_lulus'               => $request->thn_lulus,
+                'kependidikan'            => $request->kependidikan,
+                'ktp'                     => $ktp,
+                'kk'                      => $kk,
+                'npwp'                    => $npwp,
+                'ijazah'                  => $ijazah,
+                'akte'                    => $akte,
+                'foto'                    => $foto
             ]);
         }
 
         return redirect()->back()->with('success', 'Berhasil menambahkan data guru baru!');
+    }
+
+    /**
+     * move file to public guru
+     */
+    public function moveToPublic($file)
+    {
+        $fileName = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . "_" . $file->getClientOriginalName();
+        $destination = public_path('uploads/guru');
+        $file->move($destination,$fileName);
+
+        return $fileName;
     }
 
     /**
@@ -133,9 +243,34 @@ class GuruController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'nama_guru' => 'required',
-            'mapel_id' => 'required',
-            'jk' => 'required',
+            'nama_guru'                => 'required',
+            'mapel_id'                 => 'required',
+            // 'kode'                     => 'required|string|unique:guru|min:2|max:3',
+            'jk'                       => 'required',
+            'nama_ibu_kandung'         => 'required',
+            'alamat'                   => 'required',
+            'rt'                       => 'required',
+            'rw'                       => 'required',
+            'kelurahan'                => 'required',
+            'kecamatan'                => 'required',
+            'kode_pos'                 => 'required',
+            'nik'                      => 'required',
+            'no_kk'                    => 'required',
+            'no_npwp'                  => 'required',
+            'nama_wajib_pajak'         => 'required',
+            'agama'                    => 'required',
+            'kewarganegaraan'          => 'required',
+            'status_perkawinan'        => 'required',
+            'nama_suami_istri'         => 'required',
+            'nik_suami_istri'          => 'required',
+            'pekerjaan'                => 'required',
+            'jenis_ptk'                => 'required',
+            'pendidikan_terakhir'      => 'required',
+            'satuan_pendidikan_formal' => 'required',
+            'fakultas'                 => 'required',
+            'thn_masuk'                => 'required',
+            'thn_lulus'                => 'required',
+            'kependidikan'             => 'required',
         ]);
 
         $guru = Guru::findorfail($id);
@@ -148,12 +283,36 @@ class GuruController extends Controller
         } else {
         }
         $guru_data = [
-            'nama_guru' => $request->nama_guru,
-            'mapel_id' => $request->mapel_id,
-            'jk' => $request->jk,
-            'telp' => $request->telp,
-            'tmp_lahir' => $request->tmp_lahir,
-            'tgl_lahir' => $request->tgl_lahir
+            'nama_guru'             => $request->nama_guru,
+            'mapel_id'              => $request->mapel_id,
+            'jk'                    => $request->jk,
+            'telp'                  => $request->telp,
+            'tmp_lahir'             => $request->tmp_lahir,
+            'tgl_lahir'             => $request->tgl_lahir,
+            'nama_ibu_kandung'      => $request->nama_ibu_kandung,
+            'alamat'                => $request->alamat,
+            'rt'                    => $request->rt,
+            'rw'                    => $request->rw,
+            'kelurahan'             => $request->kelurahan,
+            'kecamatan'             => $request->kecamatan,
+            'kode_pos'              => $request->kode_pos,
+            'number_phone'          => $request->number_phone,
+            'no_kk'                 => $request->no_kk,
+            'no_npwp'               => $request->no_npwp,
+            'nama_wajib_pajak'      => $request->nama_wajib_pajak,
+            'agama'                 => $request->agama,
+            'kewarganegaraan'       => $request->kewarganegaraan,
+            'status_perkawinan'     => $request->status_perkawinan,
+            'nama_suami_istri'      => $request->nama_suami_istri,
+            'nik_suami_istri'       => $request->nik_suami_istri,
+            'pekerjaan'             => $request->pekerjaan,
+            'jenis_ptk'             => $request->jenis_ptk,
+            'pendidikan_terakhir'   => $request->pendidikan_terakhir,
+            'satuan_pendidikan_formal'=> $request->satuan_pendidikan_formal,
+            'fakultas'                => $request->fakultas,
+            'thn_masuk'               => $request->thn_masuk,
+            'thn_lulus'               => $request->thn_lulus,
+            'kependidikan'            => $request->kependidikan,
         ];
         $guru->update($guru_data);
 
