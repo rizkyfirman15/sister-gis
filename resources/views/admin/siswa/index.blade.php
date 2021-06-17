@@ -146,8 +146,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="number_phone">Phone number</label>
-                        <input type="text" id="number_phone" name="number_phone" onkeypress="return inputAngka(event)" class="form-control @error('number_phone') is-invalid @enderror">
+                        <label for="telp">Phone number</label>
+                        <input type="text" id="telp" name="telp" onkeypress="return inputAngka(event)" class="form-control @error('number_phone') is-invalid @enderror">
                     </div>
                     <div class="form-group">
                         <label for="tgl_lahir">Date of birth</label>
@@ -174,7 +174,7 @@
                         <input type="number" id="rata_rata_nilai" name="rata_rata_nilai" onkeypress="return inputAngka(event)" class="form-control @error('rata_rata_nilai') is-invalid @enderror">
                     </div>
                     <div class="form-group">
-                        <label for="alamat">Address School</label>
+                        <label for="alamat">School Address</label>
                         <input type="text" id="alamat" name="alamat" class="form-control @error('alamat') is-invalid @enderror">
                     </div>
                     <div class="form-group">
@@ -310,8 +310,15 @@
                         <input type="text" id="pekerjaan" name="pekerjaan" class="form-control @error('pekerjaan') is-invalid @enderror">
                     </div>
                     <div class="form-group">
-                        <label for="agama">Relagion</label>
-                        <input type="text" id="agama" name="agama" class="form-control @error('agama') is-invalid @enderror">
+                        <label for="agama">Religion</label>
+                        <select id="agama" name="agama" class="select2bs4 form-control @error('jk') is-invalid @enderror">
+                            <option value="">-- Select Religion --</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Buddha">Buddha</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Kong hu cu">Kong hu cu</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="number_phone">Phone number</label>
@@ -326,8 +333,15 @@
                         <input type="text" id="pekerjaan" name="pekerjaan" class="form-control @error('pekerjaan') is-invalid @enderror">
                     </div>
                     <div class="form-group">
-                        <label for="agama">Relagion</label>
-                        <input type="text" id="agama" name="agama" class="form-control @error('agama') is-invalid @enderror">
+                        <label for="agama">Religion</label>
+                        <select id="agama" name="agama" class="select2bs4 form-control @error('jk') is-invalid @enderror">
+                            <option value="">-- Select Religion --</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Buddha">Buddha</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Kong hu cu">Kong hu cu</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="number_phone">Phone number</label>

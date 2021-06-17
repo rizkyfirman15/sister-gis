@@ -37,11 +37,11 @@ class AddDataTambahanToGuruTable extends Migration
             $table->string('fakultas')->after('satuan_pendidikan_formal');
             $table->string('thn_masuk')->after('fakultas');
             $table->string('thn_lulus')->after('thn_masuk');
-            $table->string('ktp')->after('nim');
-            $table->string('kk')->after('ktp');
-            $table->string('npwp')->after('kk');
-            $table->string('ijazah')->after('npwp');
-            $table->string('akte')->after('ijazah');
+            $table->string('ktp')->after('thn_lulus')->nullable();
+            $table->string('kk')->after('ktp')->nullable();
+            $table->string('npwp')->after('kk')->nullable();
+            $table->string('ijazah')->after('npwp')->nullable();
+            $table->string('akte')->after('ijazah')->nullable();
             $table->string('kependidikan')->after('akte');
         });
     }

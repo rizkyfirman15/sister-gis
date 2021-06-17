@@ -11,7 +11,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Operator')
+                @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Curriculum')
                 <li class="nav-item has-treeview" id="liDashboard">
                         <a href="#" class="nav-link" id="Dashboard">
                             <i class="nav-icon fas fa-home"></i>
@@ -197,7 +197,7 @@
                             <p>Announcement</p>
                         </a>
                     </li>
-                @elseif (Auth::user()->role == 'Guru' && Auth::user()->guru(Auth::user()->id_card))
+                @elseif (Auth::user()->role == 'Teacher' && Auth::user()->guru(Auth::user()->id_card))
                 <li class="nav-item has-treeview">
                         <a href="{{ url('/') }}" class="nav-link" id="Home">
                             <i class="nav-icon fas fa-home"></i>
@@ -275,7 +275,7 @@
                             </li>
                         </ul>
                     </li>
-                @elseif (Auth::user()->role == 'Siswa' && Auth::user()->siswa(Auth::user()->no_induk))
+                @elseif (Auth::user()->role == 'Student' && Auth::user()->siswa(Auth::user()->no_induk))
                 <li class="nav-item has-treeview">
                         <a href="{{ url('/') }}" class="nav-link" id="Home">
                             <i class="nav-icon fas fa-home"></i>

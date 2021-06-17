@@ -47,26 +47,6 @@ class Siswa extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
-    // public function dataPribadi()
-    // {
-    //     return $this->belongsTo('App\DataPribadiSiswa')->withDefault();
-    // }
-
-    // public function ayah()
-    // {
-    //     return $this->belongsTo('App\DataAyah')->withDefault();
-    // }
-
-    // public function ibu()
-    // {
-    //     return $this->belongsTo('App\DataIbu')->withDefault();
-    // }
-
-    // public function sekolah()
-    // {
-    //     return $this->belongsTo('App\DataSekolahAsal')->withDefault();
-    // }
-
     public function dataPribadi()
     {
         return $this->hasOne(DataPribadiSiswa::class, 'siswa_id');

@@ -15,7 +15,7 @@ class Guru
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user()->role != 'Guru') {
+        if ($request->user()->role != 'Teacher') {
             return redirect('/');
         }
         return $next($request);

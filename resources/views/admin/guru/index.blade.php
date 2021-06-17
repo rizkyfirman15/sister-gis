@@ -223,6 +223,15 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="kelas_id">Class</label>
+                        <select id="kelas_id" name="kelas_id" class="select2bs4 form-control @error('kelas_id') is-invalid @enderror">
+                            <option value="">-- Select Class --</option>
+                            @foreach ($kelas as $data)
+                                <option value="{{ $data->id }}">{{ $data->nama_kelas }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     @php
                         $kode = $max+1;
                         if (strlen($kode) == 1) {

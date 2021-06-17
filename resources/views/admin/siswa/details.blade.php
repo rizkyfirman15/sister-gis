@@ -18,29 +18,59 @@
                         alt="...">
                     <br>
                     <br>
-                    <img src="{{ url ('/uploads/dataPribadi/'.$siswa->dataPribadi->kk) }}"  
-                        class="card-img img-details rounded" 
-                        alt="...">
+                    @if($siswa->dataPribadi->kk)
+                        <img src="{{ url ('/uploads/siswa/dataPribadi'.$siswa->dataPribadi->kk) }}"  
+                            class="card-img img-details rounded" 
+                            alt="...">
+                    @else
+                        <img src="/img/default.jpg"  
+                                class="card-img img-details rounded" 
+                                alt="...">
+                    @endif
                     <br>
                     <br>
-                    <img src="{{ url ('/uploads/dataPribadi/'.$siswa->dataPribadi->ijazah) }}"  
-                        class="card-img img-details rounded" 
-                        alt="...">
+                    @if($siswa->dataPribadi->ijazah)
+                        <img src="{{ url ('/uploads/siswa/dataPribadi'.$siswa->dataPribadi->ijazah) }}"  
+                            class="card-img img-details rounded" 
+                            alt="...">
+                    @else
+                        <img src="/img/default.jpg"  
+                            class="card-img img-details rounded" 
+                            alt="...">
+                    @endif
                     <br>
                     <br>
-                    <img src="{{ url ('/uploads/dataPribadi/'.$siswa->dataPribadi->akte) }}"  
-                        class="card-img img-details rounded" 
-                        alt="...">
+                    @if($siswa->dataPribadi->akte)
+                        <img src="{{ url ('/uploads/siswa/dataPribadi'.$siswa->dataPribadi->akte) }}"  
+                            class="card-img img-details rounded" 
+                            alt="...">
+                    @else
+                        <img src="/img/default.jpg"  
+                                class="card-img img-details rounded" 
+                                alt="...">
+                    @endif
                     <br>
                     <br>
-                    <img src="{{ url ('/uploads/dataPribadi/'.$siswa->dataPribadi->raport_terakhir) }}"  
-                        class="card-img img-details rounded" 
-                        alt="...">
+                    @if($siswa->dataPribadi->raport_terakhir)
+                        <img src="{{ url ('/uploads/siswa/dataPribadi'.$siswa->dataPribadi->raport_terakhir) }}"  
+                            class="card-img img-details rounded" 
+                            alt="...">
+                    @else
+                        <img src="/img/default.jpg"  
+                                class="card-img img-details rounded" 
+                                alt="...">
+                    @endif
                     <br>
                     <br>
-                    <img src="{{ url ('/uploads/dataPribadi/'.$siswa->dataPribadi->document) }}"  
-                        class="card-img img-details rounded" 
-                        alt="...">
+                    @if($siswa->sekolah->document)
+                        <img src="{{ url ('/uploads/siswa/dataPribadi/'.$siswa->sekolah->document) }}"  
+                            class="card-img img-details rounded" 
+                            alt="...">
+                    @else
+                        <img src="/img/default.jpg"  
+                                class="card-img img-details rounded" 
+                                alt="...">
+                    @endif
                     <br>
                     
                 </div>

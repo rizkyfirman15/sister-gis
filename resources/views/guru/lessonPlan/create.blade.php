@@ -17,26 +17,45 @@
         @csrf
         <div class="card-body">
           <div class="row">
+            <div class="col-md-12">
+                <table class="table" style="margin-top: -10px;">
+                    <tr>
+                        <td>Subject Teacher</td>
+                        <td>:</td>
+                        <td>{{ $guru->nama_guru }}</td>
+                    </tr>
+                    <tr>
+                        <td>Subject</td>
+                        <td>:</td>
+                        <td>{{ $guru->mapel->nama_mapel }}</td>
+                    </tr>
+                    <tr>
+                        <td>Class Name</td>
+                        <td>:</td>
+                        <td>{{ $guru->kelas->nama_kelas }}</td>
+                    </tr>
+                    @php
+                        $bulan = date('m');
+                    @endphp
+                    <!-- <tr>
+                        <td>Semester</td>
+                        <td>:</td>
+                        <td>
+                            @if ($bulan > 6)
+                                {{ 'Semester Ganjil' }}
+                            @else
+                                {{ 'Semester Genap' }}
+                            @endif
+                        </td>
+                    </tr> -->
+                </table>
+                <hr>
+            </div>
+
             <div class="col-md-6">
-                <div class="form-group">
-                    <label for="mapel_id">Subject Name / Nama Mapel</label>
-                    <select id="mapel_id" name="mapel_id" class="select2bs4 form-control @error('mapel_id') is-invalid @enderror select2bs4">
-                      <option value="">-- Select Subject Name --</option>
-                      @foreach ($mapel as $data)
-                       <option value="{{ $data->id }}" >{{ $data->nama_mapel }}</option>
-                      @endforeach
-                    </select>
-                </div>
+                <input type="hidden" name="mapel_id" value="{{$guru->mapel->id}}">
                 
-                <div class="form-group">
-                  <label for="kelas_id">Class / Kelas</label>
-                  <select id="kelas_id" name="kelas_id" class="form-control @error('kelas_id') is-invalid @enderror select2bs4">
-                    <option value="">-- Select Class Name --</option>
-                    @foreach ($kelas as $data)
-                      <option value="{{ $data->id }}" >{{ $data->nama_kelas }}</option>
-                    @endforeach
-                  </select>
-                </div>
+                <input type="hidden" name="kelas_id" value="{{$guru->kelas->id}}">
 
                 <div class="form-group">
                   <label for="teaching_strategy">Teaching Strategy / Strategi Pengajaran</label>
@@ -52,19 +71,6 @@
                     <option value="Socratic Question" @if (old( 'teaching_strategy' ) == "Socratic Question" ) {{ 'selected' }} @endif>Socratic Question / Pertanyaan Sokrates</option>
                   </select>
                 </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                  <label for="metode">Competency / Kompetensi</label>
-                  <select id="metode" name="metode" class="form-control @error('metode') is-invalid @enderror select2bs4">
-                  <option value="">-- Select 4C --</option>
-                    <option value="Communication" @if (old( 'metode' ) == "Communication" ) {{ 'selected' }} @endif>Communication / Komunikasi</option>
-                    <option value="Collaboration" @if (old( 'metode' ) == "Collaboration" ) {{ 'selected' }} @endif>Collaboration / Kolaborasi</option>
-                    <option value="Critical Thinking" @if (old( 'metode' ) == "Critical Thinking" ) {{ 'selected' }} @endif>Critical Thinking / Berpikir Kritis</option>
-                    <option value="Creativity" @if (old( 'metode' ) == "Creativity" ) {{ 'selected' }} @endif>Creativity / Kreativitas</option>
-                  </select>
-                </div>
 
                 <div class="form-group">
                   <label for="hot">Thinking Skills / Kemampuan Berpikir</label>
@@ -78,21 +84,41 @@
                     <option value="Creating" @if (old( 'hot' ) == "Creating" ) {{ 'selected' }} @endif>Creating / Menciptakan</option>
                   </select>
                 </div>
+            </div>
 
-                <div class="form-group">
+            <div class="col-md-6">
+                @php
+                  $bulan = date('m');
+                @endphp
+                <!-- <div class="form-group">
                   <label for="semester">Semester</label>
                   <select id="semester" name="semester" class="form-control @error('semester') is-invalid @enderror select2bs4">
                     <option value="">-- Select Semester --</option>
                     <option value="1" @if (old( 'semester' ) == "1" ) {{ 'selected' }} @endif>1</option>
                     <option value="2" @if (old( 'semester' ) == "2" ) {{ 'selected' }} @endif>2</option>
                   </select>
+                </div> -->
+                <div class="form-group">
+                  <label for="semester">Semester</label>
+                  <input type="text" id="semester" name="semester" value="@if ($bulan > 6) {{ 'Semester Ganjil' }} @else {{ 'Semester Genap' }} @endif" class="form-control @error('semester') is-invalid @enderror" placeholder="{{ __('Semester') }}" readonly>
+                </div>
+
+                <div class="form-group">
+                  <label for="metode">Competency / Kompetensi</label>
+                  <select id="metode" name="metode" class="form-control @error('metode') is-invalid @enderror select2bs4">
+                  <option value="">-- Select 4C --</option>
+                    <option value="Communication" @if (old( 'metode' ) == "Communication" ) {{ 'selected' }} @endif>Communication / Komunikasi</option>
+                    <option value="Collaboration" @if (old( 'metode' ) == "Collaboration" ) {{ 'selected' }} @endif>Collaboration / Kolaborasi</option>
+                    <option value="Critical Thinking" @if (old( 'metode' ) == "Critical Thinking" ) {{ 'selected' }} @endif>Critical Thinking / Berpikir Kritis</option>
+                    <option value="Creativity" @if (old( 'metode' ) == "Creativity" ) {{ 'selected' }} @endif>Creativity / Kreativitas</option>
+                  </select>
                 </div>
             </div>
 
             <div class="col-md-12">
                 <div class="form-group">
-                  <label for="time_alocation">Time Alocation / Alokasi Waktu</label>
-                  <input type="text" id="time_alocation" name="time_alocation" class="form-control @error('time_alocation') is-invalid @enderror" placeholder="{{ __('Time Alocation') }}">
+                    <label for="time_alocation">Time Alocation / Alokasi Waktu</label>
+                    <input type="number" id="time_alocation" name="time_alocation" onkeypress="return inputAngka(event)" class="form-control @error('time_alocation') is-invalid @enderror" placeholder="{{ __('Time Alocation') }}">
                 </div>
 
                 <div class="form-group">

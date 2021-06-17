@@ -31,10 +31,10 @@ class CreateDataPribadiSiswaTable extends Migration
             $table->string('cita_cita');
             $table->string('parent_email');
             // $table->string('siswa_email');
-            $table->string('kk');
-            $table->string('akte');
-            $table->string('ijazah');
-            $table->string('raport_terakhir');
+            $table->string('kk')->nullable();
+            $table->string('akte')->nullable();
+            $table->string('ijazah')->nullable();
+            $table->string('raport_terakhir')->nullable();
             $table->timestamps();
 
             $table->foreign('siswa_id')->references('id')->on('siswa')->onUpdate('cascade')->onDelete('cascade');

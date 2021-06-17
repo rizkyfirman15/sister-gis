@@ -6,6 +6,7 @@ use Auth;
 use App\User;
 use App\Guru;
 use App\Mapel;
+use App\Kelas;
 use App\Jadwal;
 use App\Absen;
 use App\Kehadiran;
@@ -28,7 +29,9 @@ class GuruController extends Controller
     {
         $mapel = Mapel::orderBy('nama_mapel')->get();
         $max = Guru::max('id_card');
-        return view('admin.guru.index', compact('mapel', 'max'));
+        $kelas      = Kelas::all();
+
+        return view('admin.guru.index', compact('mapel', 'max', 'kelas'));
     }
 
     /**
@@ -53,6 +56,7 @@ class GuruController extends Controller
             'id_card'                  => 'required',
             'nama_guru'                => 'required',
             'mapel_id'                 => 'required',
+            'kelas_id'                 => 'required',
             'kode'                     => 'required|string|unique:guru|min:2|max:3',
             'jk'                       => 'required',
             'nama_ibu_kandung'         => 'required',
@@ -99,6 +103,7 @@ class GuruController extends Controller
                 'id_card'               => $request->id_card,
                 'nama_guru'             => $request->nama_guru,
                 'mapel_id'              => $request->mapel_id,
+                'kelas_id'              => $request->kelas_id,
                 'kode'                  => $request->kode,
                 'jk'                    => $request->jk,
                 'telp'                  => $request->telp,
@@ -153,6 +158,7 @@ class GuruController extends Controller
                 'id_card'               => $request->id_card,
                 'nama_guru'             => $request->nama_guru,
                 'mapel_id'              => $request->mapel_id,
+                'kelas_id'              => $request->kelas_id,
                 'kode'                  => $request->kode,
                 'jk'                    => $request->jk,
                 'telp'                  => $request->telp,
@@ -230,7 +236,8 @@ class GuruController extends Controller
         $id = Crypt::decrypt($id);
         $guru = Guru::findorfail($id);
         $mapel = Mapel::all();
-        return view('admin.guru.edit', compact('guru', 'mapel'));
+        $kelas = Kelas::all();
+        return view('admin.guru.edit', compact('guru', 'mapel', 'kelas'));
     }
 
     /**
@@ -245,6 +252,7 @@ class GuruController extends Controller
         $this->validate($request, [
             'nama_guru'                => 'required',
             'mapel_id'                 => 'required',
+            'kelas_id'                 => 'required',
             // 'kode'                     => 'required|string|unique:guru|min:2|max:3',
             'jk'                       => 'required',
             'nama_ibu_kandung'         => 'required',
@@ -271,6 +279,11 @@ class GuruController extends Controller
             'thn_masuk'                => 'required',
             'thn_lulus'                => 'required',
             'kependidikan'             => 'required',
+            'ktp'                      => 'mimes:jpg,jpeg,png',
+            'kk'                       => 'mimes:jpg,jpeg,png',
+            'npwp'                     => 'mimes:jpg,jpeg,png',
+            'ijazah'                   => 'mimes:jpg,jpeg,png',
+            'akte'                     => 'mimes:jpg,jpeg,png',
         ]);
 
         $guru = Guru::findorfail($id);
@@ -282,9 +295,56 @@ class GuruController extends Controller
             $user->update($user_data);
         } else {
         }
+
+        $newKtp    = $guru->ktp;
+        $oldKtp    = $guru->ktp;
+
+        $newKk     = $guru->kk;
+        $oldKk     = $guru->kk;
+
+        $newNpwp   = $guru->npwp;
+        $oldNpwp   = $guru->npwp;
+
+        $newIjazah = $guru->ijazah;
+        $oldIjazah = $guru->ijazah;
+
+        $newAkte   = $guru->akte;
+        $oldAkte   = $guru->akte;
+
+        if ($request->hasFile('ktp')) {
+            $newKtp = $this->moveToPublic($request->ktp);
+            $guru->ktp = $newKtp;
+            \File::delete(public_path('uploads/guru'.$oldKtp));
+        }
+
+        if ($request->hasFile('kk')) {
+            $newKk = $this->moveToPublic($request->kk);
+            $guru->kk = $newKk;
+            \File::delete(public_path('uploads/guru'.$oldKk));
+        }
+
+        if ($request->hasFile('npwp')) {
+            $newNpwp = $this->moveToPublic($request->npwp);
+            $guru->npwp = $newNpwp;
+            \File::delete(public_path('uploads/guru'.$oldNpwp));
+        }
+
+        if ($request->hasFile('ijazah')) {
+            $newIjazah = $this->moveToPublic($request->ijazah);
+            $guru->ijazah = $newIjazah;
+            \File::delete(public_path('uploads/guru'.$oldIjazah));
+        }
+
+        if ($request->hasFile('akte')) {
+            $newAkte = $this->moveToPublic($request->akte);
+            $guru->akte = $newAkte;
+            \File::delete(public_path('uploads/guru'.$oldAkte));
+        }
+
         $guru_data = [
             'nama_guru'             => $request->nama_guru,
             'mapel_id'              => $request->mapel_id,
+            'kelas_id'              => $request->kelas_id,
             'jk'                    => $request->jk,
             'telp'                  => $request->telp,
             'tmp_lahir'             => $request->tmp_lahir,
@@ -313,7 +373,13 @@ class GuruController extends Controller
             'thn_masuk'               => $request->thn_masuk,
             'thn_lulus'               => $request->thn_lulus,
             'kependidikan'            => $request->kependidikan,
+            'ktp'                     => $newKtp,
+            'kk'                      => $newKk,
+            'npwp'                    => $newNpwp,
+            'ijazah'                  => $newIjazah,
+            'akte'                    => $newAkte,
         ];
+
         $guru->update($guru_data);
 
         return redirect()->route('guru.index')->with('success', 'Data guru berhasil diperbarui!');

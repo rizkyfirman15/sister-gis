@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Kelas;
 use App\LessonPlan;
 use App\Mapel;
+use App\Guru;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -39,10 +41,11 @@ class LessonPlanController extends Controller
      */
     public function create()
     {
+        $guru       = Guru::where('id_card', Auth::user()->id_card)->first();
         $kelas      = Kelas::all();
         $mapel      = Mapel::all();
 
-        return view('guru.lessonPlan.create', compact('kelas', 'mapel'));
+        return view('guru.lessonPlan.create', compact('kelas', 'mapel', 'guru'));
     }
 
     /**
@@ -65,8 +68,8 @@ class LessonPlanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'mapel_id'            => 'required',
-            'kelas_id'            => 'required',
+            // 'mapel_id'            => 'required',
+            // 'kelas_id'            => 'required',
             'teaching_strategy'   => 'required',
             'metode'              => 'required',
             'hot'                 => 'required',
@@ -87,7 +90,7 @@ class LessonPlanController extends Controller
         $study_note = $this->moveToPublic($request->file('study_note'));
         $lks        = $this->moveToPublic($request->file('lks'));
 
-        LessonPlan::Create(
+        $lesson = LessonPlan::Create(
             [
                 'id'                  => $request->id,
                 'mapel_id'            => $request->mapel_id,

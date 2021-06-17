@@ -24,7 +24,7 @@ class CreateDataSekolahAsalsTable extends Migration
             $table->string('no_ijazah', 20);
             $table->string('rata_rata_nilai', 10);
             $table->string('no_skhun', 20);
-            $table->string('document');
+            $table->string('document')->nullable();
             $table->timestamps();
 
             $table->foreign('siswa_id')->references('id')->on('siswa')->onUpdate('cascade')->onDelete('cascade');

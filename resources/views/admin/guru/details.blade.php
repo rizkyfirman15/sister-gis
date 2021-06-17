@@ -45,6 +45,7 @@
                         <li class="list-group-item">Name / Nama : {{ $guru->nama_guru }}</li>
                         <li class="list-group-item">ID Card number / No Id Card : {{ $guru->id_card }}</li>
                         <li class="list-group-item">Teacher Subject / Guru Mapel : {{ $guru->mapel->nama_mapel }}</li>
+                        <li class="list-group-item">Class / Kelas : {{ $guru->kelas->nama_kelas }}</li>
                         <li class="list-group-item">Subject Code / Kode Mapel : {{ $guru->kode }}</li>
                         @if ($guru->jk == 'L')
                         <li class="list-group-item">Gender / Jenis Kelamin : Male</li>
